@@ -32,17 +32,9 @@ Those are different failures, even though the first thing a developer often sees
 
 The first three will form the runnable core. Cross-cluster TLS will remain a documented extension until the local core is solid.
 
-## How I approached it
-
-I started with the error a client could see, then checked one layer at a time. A failed `curl` by itself did not tell me whether DNS, policy, routing, or the application was responsible. The useful part was finding the next observation that ruled something in or out. That is why these writeups keep the commands and the evidence close to the explanation.
-
 ## Roadmap
 
 See [ROADMAP.md](ROADMAP.md) for the five delivery parts and their completion criteria.
-
-## Notes on provenance
-
-The recorded lab is the source for the observations. Commands and output quoted in future incident writeups will be marked as **original lab evidence**. Output generated while building this repo will be marked separately. Some notes in the lab are hypotheses or conceptual explanations. I will check those before presenting them as results. The raw lab PDF includes personal terminal context and rough notes, so I am curating the relevant parts here.
 
 ## References
 
