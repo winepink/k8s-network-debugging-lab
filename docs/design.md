@@ -16,7 +16,7 @@ flowchart LR
     S -. flow events .-> H
 ```
 
-The implementation will use a named kind cluster and a dedicated namespace. It will pass the intended context explicitly to `kubectl`; a setup command must not quietly operate on whichever cluster happens to be active. A teardown command will only remove the named kind cluster after checking its name.
+The implementation will use a named kind cluster and a dedicated namespace. It will pass the intended context explicitly to `kubectl`. A setup command must not quietly operate on whichever cluster happens to be active. A teardown command will only remove the named kind cluster after checking its name.
 
 ## Why these components
 
@@ -29,10 +29,10 @@ The implementation will use a named kind cluster and a dedicated namespace. It w
 ## Boundaries
 
 - This is a local kind lab. It does not create GCP resources or pretend a local policy is GCP IAM.
-- The first runnable version will keep kube-proxy in place unless a separate, verified configuration is added for replacement. The original lab contains observations from both kube-proxy and Cilium; the current setup must make that distinction explicit.
+- The first runnable version will keep kube-proxy in place unless a separate, verified configuration is added for replacement. The original lab contains observations from both kube-proxy and Cilium. The current setup must make that distinction explicit.
 - Cross-cluster TLS is a later extension. It needs separate cluster address ranges, an intentional entry point, and a certificate whose trust and hostname checks can be explained precisely.
-- VPC routing, BGP, ECMP, and physical fabrics belong in context notes. They will connect the lab to infrastructure experience without claiming the local cluster recreates a datacenter.
-- The project uses public images and generic configuration. No employer code, internal topology, credentials, or private incident details are needed.
+- VPC routing, BGP, ECMP, and physical fabrics belong in context notes. The local cluster does not recreate a datacenter.
+- The project uses public images and generic configuration.
 
 ## What counts as done
 
