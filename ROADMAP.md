@@ -1,6 +1,6 @@
 # Delivery roadmap
 
-This project is being built in five commits so each stage has a clear purpose. A checked box means the work is present in the repository, not that an older lab run was repeated.
+This project is being built in five parts so each stage has a clear purpose. A checked box means the work is present in the repository, not that an older lab run was repeated.
 
 ## 1/5 — Foundation and evidence audit
 
@@ -34,9 +34,9 @@ This project is being built in five commits so each stage has a clear purpose. A
 ## 5/5 — Verification and publication polish
 
 - [ ] Check manifests and scripts with the available static tools.
-- [ ] Run the local scenarios if an environment is available; report what was and was not exercised.
+- [ ] Run the local scenarios if an environment is available. Report what was and was not exercised.
 - [ ] Review the README as a first-time reader and remove stale or unsupported statements.
 - [ ] Scan the diff for credentials, internal details, and unneeded generated files.
-- [ ] Prepare a concise portfolio entry that links to the finished repo.
+- [ ] Check every link and command shown to a first-time reader.
 
 The original experiments were already run and recorded. Repeating the entire 90-page lab is not a requirement for finishing this repository. New automation will still be checked as far as the available environment allows, and its verification status will be stated plainly.

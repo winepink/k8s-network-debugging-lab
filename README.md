@@ -2,15 +2,15 @@
 
 I put this lab together to get past the point where Kubernetes networking feels like a collection of names: CNI, Services, DNS, policy, conntrack, overlay, ingress. When a request fails, those names are only useful if I can locate the packet, see where its path changed, and explain why.
 
-The work began with a multi-node kind cluster and Cilium. I followed traffic from a pod through DNS resolution, Service translation, and the node network; then I broke individual parts of that path and compared what `curl`, `tcpdump`, Cilium, and Hubble told me. The original lab also went further into cross-cluster calls, TLS, MTU, retries, and the connection between Kubernetes networking and the networks underneath it.
+The work began with a multi-node kind cluster and Cilium. I followed traffic from a pod through DNS resolution, Service translation, and the node network. Then I broke individual parts of that path and compared what `curl`, `tcpdump`, Cilium, and Hubble told me. The original lab also went further into cross-cluster calls, TLS, MTU, retries, and the connection between Kubernetes networking and the networks underneath it.
 
-This repository is my organized version of those investigations. It is a personal lab, built with generic workloads. It does not contain code or configuration from an employer's systems.
+This repository is my organized version of those investigations. It uses generic workloads so the packet paths stay easy to follow.
 
 ## What is here today
 
 This is **part 1 of 5**. I have mapped the recorded experiments to a smaller set of incidents and defined the setup that later parts will make runnable. The [evidence map](docs/evidence-map.md) distinguishes terminal output captured during the original lab from explanations and proposed exercises. The [design](docs/design.md) explains why the repo starts with one kind cluster and a few failure cases.
 
-There is no claim here that the new repository has been run end to end. The first commit is the foundation; the scripts, manifests, tests, and replayed examples belong to later parts.
+The new repository has not been run end to end yet. This part is the foundation. Scripts, manifests, tests, and replayed examples belong to later parts.
 
 ## The questions I want this repo to answer
 
@@ -32,9 +32,9 @@ Those are different failures, even though the first thing a developer often sees
 
 The first three will form the runnable core. Cross-cluster TLS will remain a documented extension until the local core is solid.
 
-## What I want to show
+## How I approached it
 
-My work has often sat at the boundary between an application and the infrastructure it depends on. At Google, that meant cloud networking; at Rubrik, platform infrastructure; earlier, backend and data systems at Flipkart. This lab is independent of those systems, but it shows the same habit I bring to infrastructure problems: start with a symptom, work down the stack, and make every claim answerable with a command or a packet trace.
+I started with the error a client could see, then checked one layer at a time. A failed `curl` by itself did not tell me whether DNS, policy, routing, or the application was responsible. The useful part was finding the next observation that ruled something in or out. That is why these writeups keep the commands and the evidence close to the explanation.
 
 ## Roadmap
 
@@ -42,7 +42,7 @@ See [ROADMAP.md](ROADMAP.md) for the five delivery parts and their completion cr
 
 ## Notes on provenance
 
-The recorded lab is the source for the observations. Commands and output quoted in future incident writeups will be marked as **original lab evidence**. Output generated while building this repo will be marked separately. Some notes in the lab are hypotheses or conceptual explanations; I will check those before presenting them as results. I am not publishing the raw lab PDF because it includes personal terminal context and rough notes that need curation.
+The recorded lab is the source for the observations. Commands and output quoted in future incident writeups will be marked as **original lab evidence**. Output generated while building this repo will be marked separately. Some notes in the lab are hypotheses or conceptual explanations. I will check those before presenting them as results. The raw lab PDF includes personal terminal context and rough notes, so I am curating the relevant parts here.
 
 ## References
 
