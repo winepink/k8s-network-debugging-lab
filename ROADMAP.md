@@ -12,10 +12,10 @@ This project is being built in five parts so each stage has a clear purpose. A c
 
 ## 2/5 — Local baseline
 
-- [ ] Add a kind cluster configuration with a deliberately chosen CNI and Service path.
-- [ ] Add a small echo workload, a client, and an explicit namespace.
-- [ ] Add preflight, setup, baseline, and teardown commands with context checks.
-- [ ] Document what each command is expected to change.
+- [x] Add a kind cluster configuration with a deliberately chosen CNI and Service path.
+- [x] Add a small echo workload, a client, and an explicit namespace.
+- [x] Add preflight, setup, baseline, and teardown commands with context checks.
+- [x] Document what each command is expected to change.
 
 ## 3/5 — Failure cases
 

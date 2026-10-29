@@ -8,9 +8,24 @@ This repository is my organized version of those investigations. It uses generic
 
 ## What is here today
 
-This is **part 1 of 5**. I have mapped the recorded experiments to a smaller set of incidents and defined the setup that later parts will make runnable. The [evidence map](docs/evidence-map.md) distinguishes terminal output captured during the original lab from explanations and proposed exercises. The [design](docs/design.md) explains why the repo starts with one kind cluster and a few failure cases.
+This is **part 2 of 5**. The repo now has a three-node kind cluster configuration, Cilium with Hubble, and a small client-to-echo path in the `netpath-lab` namespace. The [evidence map](docs/evidence-map.md) connects the recorded experiments to the incidents that will be added next. The [design](docs/design.md) records the network choices and scope.
 
-The new repository has not been run end to end yet. This part is the foundation. Scripts, manifests, tests, and replayed examples belong to later parts.
+The new setup has been checked statically, but it has not been run end to end yet. Docker was unavailable when this part was assembled.
+
+## Local baseline
+
+This setup uses Docker, kind, kubectl, and Helm. The cluster is named `netpath-lab`, and every Kubernetes command in the scripts targets `kind-netpath-lab` explicitly.
+
+```sh
+make preflight
+make up
+make baseline
+make down
+```
+
+`preflight` checks the required tools, Docker, and any existing lab cluster. `up` creates the named kind cluster if needed, installs Cilium, and deploys the client and echo workloads. `baseline` lists the pods, Service, and EndpointSlices, then sends one request from the client. `down` deletes only the named kind cluster.
+
+The cluster uses Cilium for pod networking and keeps kube-proxy in iptables mode for Service handling. There are two worker nodes so the later packet-path cases can include traffic between nodes.
 
 ## The questions I want this repo to answer
 
@@ -23,12 +38,12 @@ Those are different failures, even though the first thing a developer often sees
 
 ## How the investigation is organized
 
-| Incident | First symptom | Evidence to inspect | What it teaches |
+| Incident | First symptom | Evidence to inspect | Question |
 | --- | --- | --- | --- |
-| DNS outage | `curl` cannot resolve a Service name | Pod resolver, CoreDNS Deployment and Service, DNS packets | Separate name resolution from TCP reachability |
-| Policy denial | DNS or Service traffic times out | Cilium policy, endpoint identity, Hubble drop verdict | Identify a deliberate drop instead of treating it as a generic outage |
-| Service routing | Requests reach different backends, but not in neat rotation | EndpointSlice, connection reuse, Cilium service and connection maps | Separate backend selection from per-connection behavior |
-| Cross-cluster TLS | TCP connects, then certificate validation fails | Address, SNI/hostname, certificate chain | Separate a transport path from application-layer trust |
+| DNS outage | `curl` cannot resolve a Service name | Pod resolver, CoreDNS Deployment and Service, DNS packets | Did resolution fail before TCP began? |
+| Policy denial | DNS or Service traffic times out | Cilium policy, endpoint identity, Hubble drop verdict | Where was traffic dropped? |
+| Service routing | Requests reach different backends, but not in neat rotation | EndpointSlice, connection reuse, Cilium service and connection maps | When was a backend selected? |
+| Cross-cluster TLS | TCP connects, then certificate validation fails | Address, SNI/hostname, certificate chain | Did transport work while certificate validation failed? |
 
 The first three will form the runnable core. Cross-cluster TLS will remain a documented extension until the local core is solid.
 
