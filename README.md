@@ -6,12 +6,6 @@ The work began with a multi-node kind cluster and Cilium. I followed traffic fro
 
 This repository is my organized version of those investigations. It uses generic workloads so the packet paths stay easy to follow.
 
-## What is here today
-
-This is **part 2 of 5**. The repo now has a three-node kind cluster configuration, Cilium with Hubble, and a small client-to-echo path in the `netpath-lab` namespace. The [evidence map](docs/evidence-map.md) connects the recorded experiments to the incidents that will be added next. The [design](docs/design.md) records the network choices and scope.
-
-The new setup has been checked statically, but it has not been run end to end yet. Docker was unavailable when this part was assembled.
-
 ## Local baseline
 
 This setup uses Docker, kind, kubectl, and Helm. The cluster is named `netpath-lab`, and every Kubernetes command in the scripts targets `kind-netpath-lab` explicitly.
