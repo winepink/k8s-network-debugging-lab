@@ -16,7 +16,7 @@ flowchart LR
     S -. flow events .-> H
 ```
 
-The implementation will use a named kind cluster and a dedicated namespace. It will pass the intended context explicitly to `kubectl`. A setup command must not quietly operate on whichever cluster happens to be active. A teardown command will only remove the named kind cluster after checking its name.
+The implementation uses a named kind cluster with one control plane and two workers. The default kind CNI is disabled so Cilium can provide pod networking. kube-proxy stays in iptables mode for Services. The workloads live in a dedicated namespace, and the scripts pass the intended context explicitly to `kubectl`. Teardown only removes the named kind cluster.
 
 ## Why these components
 
@@ -29,7 +29,7 @@ The implementation will use a named kind cluster and a dedicated namespace. It w
 ## Boundaries
 
 - This is a local kind lab. It does not create GCP resources or pretend a local policy is GCP IAM.
-- The first runnable version will keep kube-proxy in place unless a separate, verified configuration is added for replacement. The original lab contains observations from both kube-proxy and Cilium. The current setup must make that distinction explicit.
+- The first runnable version keeps kube-proxy in place. The original lab contains observations from both kube-proxy and Cilium, so later incident notes must identify which component handled the Service path they discuss.
 - Cross-cluster TLS is a later extension. It needs separate cluster address ranges, an intentional entry point, and a certificate whose trust and hostname checks can be explained precisely.
 - VPC routing, BGP, ECMP, and physical fabrics belong in context notes. The local cluster does not recreate a datacenter.
 - The project uses public images and generic configuration.
