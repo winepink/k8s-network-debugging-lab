@@ -1,13 +1,13 @@
 .PHONY: preflight up baseline down
 
 preflight:
-	./scripts/preflight.sh
+	bash scripts/preflight.sh
 
 up:
-	./scripts/up.sh
+	bash scripts/up.sh
 
 baseline:
-	./scripts/baseline.sh
+	bash scripts/baseline.sh
 
 down:
-	./scripts/down.sh
+	bash scripts/down.sh
