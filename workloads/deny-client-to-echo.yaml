@@ -1,0 +1,16 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: deny-client-to-echo
+  namespace: netpath-lab
+spec:
+  endpointSelector:
+    matchLabels:
+      app: client
+  egress:
+    - toEntities:
+        - all
+  egressDeny:
+    - toEndpoints:
+        - matchLabels:
+            app: echo

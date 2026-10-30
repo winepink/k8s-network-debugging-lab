@@ -19,10 +19,10 @@ This project is being built in five parts so each stage has a clear purpose. A c
 
 ## 3/5 — Failure cases
 
-- [ ] Add reversible DNS and Cilium policy failures.
-- [ ] Add an incident guide for each failure: symptom, hypothesis, checks, evidence, fix.
-- [ ] Add Service routing inspection and distinguish new connections from reused ones.
-- [ ] Keep fault injection scoped to the lab cluster.
+- [x] Add reversible DNS and Cilium policy failures.
+- [x] Add incident notes for each failure: symptom, hypothesis, checks, evidence, fix.
+- [x] Add Service routing inspection and distinguish new connections from reused ones.
+- [x] Keep fault injection scoped to the lab cluster.
 
 ## 4/5 — Deeper network analysis
 
