@@ -1,4 +1,4 @@
-.PHONY: preflight up baseline down dns-down dns-up policy-on policy-off request service-routing
+.PHONY: preflight up baseline down dns-down dns-up policy-on policy-off request service-routing path-state
 
 preflight:
 	bash scripts/preflight.sh
@@ -29,3 +29,6 @@ request:
 
 service-routing:
 	bash scripts/scenarios.sh service-routing
+
+path-state:
+	bash scripts/path-state.sh

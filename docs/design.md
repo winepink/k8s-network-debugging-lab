@@ -22,7 +22,7 @@ The implementation uses a named kind cluster with one control plane and two work
 
 **One client and one echo Service** are enough to ask a surprising number of good questions. The client can resolve a name, open a connection, and make repeated requests. Several echo replicas let me inspect EndpointSlices and compare a Service's backend list with the backend that handled a request.
 
-**CoreDNS and one Cilium policy** give two failure modes that can look similar from the client. In one case DNS is unavailable. In the other, a policy may deliberately drop the client's traffic. The incident guides will show how to separate them with Kubernetes state and Hubble verdicts.
+**CoreDNS and one Cilium policy** give two failure modes that can look similar from the client. In one case DNS is unavailable. In the other, a policy may deliberately drop the client's traffic. The incident notes separate them with Kubernetes state and Hubble verdicts.
 
 **Hubble and packet capture** serve different purposes. Hubble adds workload identity and policy verdicts. A packet capture shows the packet at a particular interface. Neither should be presented as a complete view by itself.
 
@@ -30,7 +30,7 @@ The implementation uses a named kind cluster with one control plane and two work
 
 - This is a local kind lab. It does not create GCP resources or pretend a local policy is GCP IAM.
 - The first runnable version keeps kube-proxy in place. The original lab contains observations from both kube-proxy and Cilium, so later incident notes must identify which component handled the Service path they discuss.
-- Cross-cluster TLS is a later extension. It needs separate cluster address ranges, an intentional entry point, and a certificate whose trust and hostname checks can be explained precisely.
+- Cross-cluster TLS is documented from the earlier two-cluster exercise, but it is not deployed by this local baseline. It needs an intentional entry point and a certificate whose trust and hostname checks can be explained precisely.
 - VPC routing, BGP, ECMP, and physical fabrics belong in context notes. The local cluster does not recreate a datacenter.
 - The project uses public images and generic configuration.
 

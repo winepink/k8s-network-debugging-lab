@@ -26,10 +26,10 @@ This project is being built in five parts so each stage has a clear purpose. A c
 
 ## 4/5 — Deeper network analysis
 
-- [ ] Curate the recorded packet, flow, and conntrack evidence.
-- [ ] Add focused notes on VXLAN, MTU, and cross-cluster TLS where the original record supports them.
-- [ ] Review technical claims against current upstream documentation and the actual lab configuration.
-- [ ] Keep conceptual VPC, mesh, and datacenter material tied to an observed question.
+- [x] Curate the recorded packet, flow, and conntrack evidence.
+- [x] Add focused notes on VXLAN, MTU, and cross-cluster TLS where the original record supports them.
+- [x] Review technical claims against current upstream documentation and the actual lab configuration.
+- [x] Keep conceptual VPC, mesh, and datacenter material tied to an observed question.
 
 ## 5/5 — Verification and publication polish
 

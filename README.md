@@ -25,7 +25,7 @@ The cluster uses Cilium for pod networking and keeps kube-proxy in iptables mode
 
 I kept the local failures small enough to compare the same request at different layers. The [incident notes](docs/incidents.md) cover CoreDNS disappearing, Cilium denying client-to-echo traffic, and three Service backends that do not behave like a round robin. The corresponding commands are `make dns-down`, `make dns-up`, `make policy-on`, `make policy-off`, and `make service-routing`.
 
-Cross-cluster TLS and the packet-level work from the longer lab are separate investigations.
+The [packet-path notes](docs/packet-path.md) connect the DNS, Service, node, flow, and conntrack observations. `make path-state` prints the live topology and Cilium settings for the local cluster. The [MTU note](docs/mtu.md) follows the VXLAN boundary, and the [cross-cluster TLS note](docs/cross-cluster-tls.md) separates reachability from certificate identity.
 
 ## References
 
